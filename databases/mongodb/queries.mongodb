@@ -1,0 +1,35 @@
+// MongoDB Shell Script (.mongodb)
+
+// Create Collection (if not exists)
+db.createCollection("users");
+
+// Create Index
+db.users.createIndex({ email: 1 }, { unique: true });
+
+// Create (Insert) User
+db.users.insertOne({
+  name: "John Doe",
+  email: "john@example.com",
+  age: 30,
+});
+
+// Read (Find) All Users
+db.users.find({});
+
+// Read (Find) Single User
+db.users.findOne({ _id: ObjectId("user_id") });
+
+// Update User
+db.users.updateOne(
+  { _id: ObjectId("user_id") },
+  {
+    $set: {
+      name: "John Smith",
+      email: "john.smith@example.com",
+      age: 31,
+    },
+  }
+);
+
+// Delete User
+db.users.deleteOne({ _id: ObjectId("user_id") });

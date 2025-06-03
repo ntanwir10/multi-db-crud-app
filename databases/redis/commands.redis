@@ -1,0 +1,18 @@
+# Create (Set) User
+HMSET user:1 name "John Doe" email "john@example.com" age 30
+
+# Create with expiration (TTL)
+HMSET user:2 name "Jane Doe" email "jane@example.com" age 25
+EXPIRE user:2 3600  # expires in 1 hour
+
+# Read (Get) All User Fields
+HGETALL user:1
+
+# Read Specific User Field
+HGET user:1 name
+
+# Update User Field
+HSET user:1 name "John Smith"
+
+# Delete User
+DEL user:1

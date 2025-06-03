@@ -18,6 +18,28 @@ First, create a Docker network for all our databases:
 docker network create db-network
 ```
 
+### Database Network Configuration
+
+All database containers are connected to the `db-network`, allowing them to communicate with each other using container names as hostnames. This is particularly useful for applications that need to interact with multiple databases.
+
+To connect an existing container to the network:
+```bash
+docker network connect db-network <container-name>
+```
+
+#### Internal Network Hostnames
+
+When containers need to communicate with each other within the `db-network`, use these hostnames and ports:
+
+| Database | Internal Hostname | Port |
+| -------- | ----------------- | ---- |
+| MongoDB  | mongodb           | 27017 |
+| Cassandra | cassandra        | 9042 |
+| Redis    | redis             | 6379 |
+| MSSQL    | mssql             | 1433 |
+
+For example, if your application container is also connected to the `db-network`, it can connect to MongoDB using `mongodb:27017` as the connection string.
+
 ### 1. Microsoft SQL Server (MSSQL)
 ```bash
 # Pull the image
